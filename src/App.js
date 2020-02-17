@@ -2,7 +2,7 @@ import React from "react";
 import "./App.scss";
 
 //Dependencies
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 //Componets
 import AppContainer from "./components/app-container/AppContainer";

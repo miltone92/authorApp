@@ -27,20 +27,20 @@ export const BookRegistry = () => {
 
   let postToApi = (title, author) => {
     let user = JSON.parse(sessionStorage.getItem("user"));
-    let jws = user.jwt;
+    // let jws = user.jwt;
 
     axios
       .post(
-        "http://localhost:8080/api/v1/book/",
+        "http://localhost:3000/routes/books/",
         {
           title: title,
           author: author
         },
-        {
-          headers: {
-            jws: jws
-          }
-        }
+        // {
+        //   headers: {
+        //     jws: jws
+        //   }
+        // }
       )
       .then(response => {
         setAlert({

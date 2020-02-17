@@ -25,19 +25,19 @@ export const AuthorRegistry = () => {
 
   let postToApi = fullName => {
     let user = JSON.parse(sessionStorage.getItem("user"));
-    let jws = user.jwt;
+    // let jws = user.jwt;
 
     axios
       .post(
-        "http://localhost:8080/api/v1/author/",
+        "http://localhost:3000/routes/authors/",
         {
           fullName: fullName
         },
-        {
-          headers: {
-            jws: jws
-          }
-        }
+        // {
+        //   headers: {
+        //     jws: jws
+        //   }
+        // }
       )
       .then(response => {
         setAlert({

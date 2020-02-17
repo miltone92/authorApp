@@ -14,7 +14,7 @@ export const BookSearch = () => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/book/").then(response => {
+    axios.get("http://localhost:3000/routes/books/").then(response => {
       setData({
         books: response.data,
         filteredBooks: []

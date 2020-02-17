@@ -9,17 +9,50 @@ import SearchBox from "../components/search-box/SearchBox";
 export const AuthorSearch = () => {
   const [data, setData] = useState({
     authors: [],
+    books: [],
     filteredAuthors: []
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/author/").then(response => {
-      setData({
-        authors: response.data,
-        filteredAuthors: []
-      });
-    });
+
+    const authors = axios.get("http://localhost:3000/routes/authors/")
+    const books = axios.get("http://localhost:3000/routes/books/")
+
+    axios.all([authors, books]).then(axios.spread((...responses) => {
+
+      const authorList = responses[0].data
+      const bookList = responses[1].data
+
+      assignBooks(authorList, bookList)
+    }))
+
+
   }, []);
+
+
+  let assignBooks = (authors, books) => {
+
+    const authorsWithBooks = authors.map(author => ({ ...author, books: books.filter(book => book.author === author.fullName) }));
+
+    //*** Abobe ^ si same as the following */
+    // console.log(authors)
+    // for (const a of authors) {
+    //   a.books = [];
+    //   for (const b of books) {
+    //     if (a.fullName === b.author) {
+    //       a.books.push(b)
+    //     }
+    //   }
+    // }
+
+
+
+    setData({
+      ...data,
+      authors: authorsWithBooks,
+      books: books,
+    });
+  }
 
   let getFormData = value => {
     setAuthors(value);
